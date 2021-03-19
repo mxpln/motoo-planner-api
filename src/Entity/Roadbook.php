@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=RoadbookRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Roadbook
 {
@@ -304,5 +305,12 @@ class Roadbook
         }
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist() {
+        $this->setCreatedAt(new \DateTime());
     }
 }

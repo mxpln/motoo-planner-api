@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=SuggestionRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Suggestion
 {
@@ -243,5 +244,12 @@ class Suggestion
         $this->categories->removeElement($category);
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist() {
+        $this->setCreatedAt(new \DateTime());
     }
 }
