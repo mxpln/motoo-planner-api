@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -58,6 +60,16 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Roadbook::class, mappedBy="user")
+     */
+    private $roadbooks;
+
+    public function __construct()
+    {
+        $this->roadbooks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -196,6 +208,36 @@ class User implements UserInterface
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Roadbook[]
+     */
+    public function getRoadbooks(): Collection
+    {
+        return $this->roadbooks;
+    }
+
+    public function addRoadbook(Roadbook $roadbook): self
+    {
+        if (!$this->roadbooks->contains($roadbook)) {
+            $this->roadbooks[] = $roadbook;
+            $roadbook->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoadbook(Roadbook $roadbook): self
+    {
+        if ($this->roadbooks->removeElement($roadbook)) {
+            // set the owning side to null (unless already changed)
+            if ($roadbook->getUser() === $this) {
+                $roadbook->setUser(null);
+            }
+        }
 
         return $this;
     }

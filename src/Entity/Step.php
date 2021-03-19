@@ -42,6 +42,16 @@ class Step
      */
     private $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Roadbook::class, inversedBy="steps")
+     */
+    private $roadbook;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Suggestion::class, cascade={"persist", "remove"})
+     */
+    private $suggestion;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +113,30 @@ class Step
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getRoadbook(): ?Roadbook
+    {
+        return $this->roadbook;
+    }
+
+    public function setRoadbook(?Roadbook $roadbook): self
+    {
+        $this->roadbook = $roadbook;
+
+        return $this;
+    }
+
+    public function getSuggestion(): ?Suggestion
+    {
+        return $this->suggestion;
+    }
+
+    public function setSuggestion(?Suggestion $suggestion): self
+    {
+        $this->suggestion = $suggestion;
 
         return $this;
     }

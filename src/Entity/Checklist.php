@@ -22,6 +22,11 @@ class Checklist
      */
     private $task;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Roadbook::class, inversedBy="checklists")
+     */
+    private $roadbook;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Checklist
     public function setTask(string $task): self
     {
         $this->task = $task;
+
+        return $this;
+    }
+
+    public function getRoadbook(): ?Roadbook
+    {
+        return $this->roadbook;
+    }
+
+    public function setRoadbook(?Roadbook $roadbook): self
+    {
+        $this->roadbook = $roadbook;
 
         return $this;
     }

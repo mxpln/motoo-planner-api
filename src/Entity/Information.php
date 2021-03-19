@@ -37,6 +37,11 @@ class Information
      */
     private $phone;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Roadbook::class, inversedBy="informations")
+     */
+    private $roadbook;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Information
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getRoadbook(): ?Roadbook
+    {
+        return $this->roadbook;
+    }
+
+    public function setRoadbook(?Roadbook $roadbook): self
+    {
+        $this->roadbook = $roadbook;
 
         return $this;
     }

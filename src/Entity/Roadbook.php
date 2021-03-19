@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RoadbookRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,33 @@ class Roadbook
      * @ORM\Column(type="string", length=255)
      */
     private $sharePassword;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="roadbooks")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Information::class, mappedBy="roadbook")
+     */
+    private $informations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Checklist::class, mappedBy="roadbook")
+     */
+    private $checklists;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="roadbook")
+     */
+    private $steps;
+
+    public function __construct()
+    {
+        $this->informations = new ArrayCollection();
+        $this->checklists = new ArrayCollection();
+        $this->steps = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +200,108 @@ class Roadbook
     public function setSharePassword(string $sharePassword): self
     {
         $this->sharePassword = $sharePassword;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Information[]
+     */
+    public function getInformations(): Collection
+    {
+        return $this->informations;
+    }
+
+    public function addInformation(Information $information): self
+    {
+        if (!$this->informations->contains($information)) {
+            $this->informations[] = $information;
+            $information->setRoadbook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInformation(Information $information): self
+    {
+        if ($this->informations->removeElement($information)) {
+            // set the owning side to null (unless already changed)
+            if ($information->getRoadbook() === $this) {
+                $information->setRoadbook(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Checklist[]
+     */
+    public function getChecklists(): Collection
+    {
+        return $this->checklists;
+    }
+
+    public function addChecklist(Checklist $checklist): self
+    {
+        if (!$this->checklists->contains($checklist)) {
+            $this->checklists[] = $checklist;
+            $checklist->setRoadbook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChecklist(Checklist $checklist): self
+    {
+        if ($this->checklists->removeElement($checklist)) {
+            // set the owning side to null (unless already changed)
+            if ($checklist->getRoadbook() === $this) {
+                $checklist->setRoadbook(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Step[]
+     */
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function addStep(Step $step): self
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps[] = $step;
+            $step->setRoadbook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStep(Step $step): self
+    {
+        if ($this->steps->removeElement($step)) {
+            // set the owning side to null (unless already changed)
+            if ($step->getRoadbook() === $this) {
+                $step->setRoadbook(null);
+            }
+        }
 
         return $this;
     }
