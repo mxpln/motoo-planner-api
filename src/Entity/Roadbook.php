@@ -4,13 +4,13 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RoadbookRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=RoadbookRepository::class)
- * @ORM\HasLifecycleCallbacks()
  * @ApiResource()
  */
 class Roadbook
@@ -20,72 +20,72 @@ class Roadbook
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $status;
+    private ?int $status;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $pictureUrl;
+    private ?string $pictureUrl;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private ?DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?DateTimeInterface $updatedAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $tripStart;
+    private ?DateTimeInterface $tripStart;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $shareLink;
+    private ?string $shareLink;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $sharePassword;
+    private ?string $sharePassword;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="roadbooks")
      */
-    private $user;
+    private ?User $user;
 
     /**
      * @ORM\OneToMany(targetEntity=Information::class, mappedBy="roadbook")
      */
-    private $informations;
+    private ArrayCollection $informations;
 
     /**
      * @ORM\OneToMany(targetEntity=Checklist::class, mappedBy="roadbook")
      */
-    private $checklists;
+    private ArrayCollection $checklists;
 
     /**
      * @ORM\OneToMany(targetEntity=Step::class, mappedBy="roadbook")
      */
-    private $steps;
+    private ArrayCollection $steps;
 
     public function __construct()
     {
@@ -147,36 +147,36 @@ class Roadbook
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(?DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function getTripStart(): ?\DateTimeInterface
+    public function getTripStart(): ?DateTimeInterface
     {
         return $this->tripStart;
     }
 
-    public function setTripStart(\DateTimeInterface $tripStart): self
+    public function setTripStart(DateTimeInterface $tripStart): self
     {
         $this->tripStart = $tripStart;
 
@@ -307,12 +307,5 @@ class Roadbook
         }
 
         return $this;
-    }
-
-    /**
-     * @ORM\PrePersist()
-     */
-    public function prePersist() {
-        $this->setCreatedAt(new \DateTime());
     }
 }

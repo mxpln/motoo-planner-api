@@ -24,7 +24,7 @@ class RoadbookFixtures extends Fixture implements DependentFixtureInterface
             $book
                 ->setTitle($faker->sentence(4, true))
                 ->setDescription($faker->sentence(8, true))
-                ->setStatus($faker->numberBetween(0,1))
+                ->setStatus($faker->numberBetween(1,2))
                 ->setPictureUrl('https://picsum.photos/300/200')
                 ->setCreatedAt($date)
                 ->setTripStart($faker->dateTimeBetween('now', '+4 months'))

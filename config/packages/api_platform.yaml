@@ -1,4 +1,7 @@
 api_platform:
+    title: 'Motoo Planner API'
+    description: 'A Symfony API to manage Motoo Planner App.'
+    version: '1.0.0'
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
