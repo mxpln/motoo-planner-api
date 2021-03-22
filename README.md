@@ -1,21 +1,10 @@
 ## Photos
+***
 Toutes les photos du site proviennent du site [pexels.com](https://www.pexels.com/) et sont libre 
 d'utilisation.
 
-## Démarrer l'application
-***
-
-Pour démarrer le serveur web (à la racine du projet) :
-```sh
-$ symfony serve
-```
-ou
-
-```sh
-$ php -S localhost:3000 -t public 
-```
-
 ## Installation
+***
 
 Créer le fichier .env.local avec la connexion à la base de données (ex) :
 
@@ -38,9 +27,22 @@ $ php bin/console doctrine:migrations:migrate
 $ php bin/console doctrine:fixtures:load
 ```
 
-- Démarrer l'application :
+## Démarrer l'application
+***
 
+Pour démarrer le serveur web (à la racine du projet) :
 ```sh
 $ symfony serve
 ```
+ou
 
+```sh
+$ php -S localhost:3000 -t public 
+```
+
+## lancer les tests avec newman
+***
+
+```sh
+$ newman run ./postman/postman_collection.json -e ./postman/postman_environment.json
+```

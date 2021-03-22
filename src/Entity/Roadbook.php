@@ -8,10 +8,15 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=RoadbookRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={"order"={"updatedAt":"DESC"}},
+ *     normalizationContext={"groups"={"read:roadbook"}},
+ *     denormalizationContext={"groups"={"create:roadbook"}}
+ * )
  */
 class Roadbook
 {
@@ -19,73 +24,87 @@ class Roadbook
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:roadbook", "read:user-roadbooks"})
      */
-    private ?int $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"create:roadbook", "read:roadbook","read:user-roadbooks"})
      */
-    private ?string $title;
+    private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"create:roadbook", "read:roadbook","read:user-roadbooks"})
      */
-    private ?string $description;
+    private $description;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"create:roadbook", "read:roadbook","read:user-roadbooks"})
      */
-    private ?int $status;
+    private $status;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"create:roadbook", "read:roadbook","read:user-roadbooks"})
      */
-    private ?string $pictureUrl;
+    private $pictureUrl;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"create:roadbook", "read:roadbook"})
      */
-    private ?DateTimeInterface $createdAt;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"create:roadbook", "read:roadbook"})
      */
-    private ?DateTimeInterface $updatedAt;
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"create:roadbook", "read:roadbook"})
      */
-    private ?DateTimeInterface $tripStart;
+    private $tripStart;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"create:roadbook", "read:roadbook"})
      */
-    private ?string $shareLink;
+    private $shareLink;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"create:roadbook", "read:roadbook"})
      */
-    private ?string $sharePassword;
+    private $sharePassword;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="roadbooks")
+     * @Groups({"create:roadbook", "read:roadbook"})
      */
-    private ?User $user;
+    private $user;
 
     /**
      * @ORM\OneToMany(targetEntity=Information::class, mappedBy="roadbook")
+     * @Groups({"read:roadbook"})
      */
-    private ArrayCollection $informations;
+    private $informations;
 
     /**
      * @ORM\OneToMany(targetEntity=Checklist::class, mappedBy="roadbook")
+     * @Groups({"read:roadbook"})
      */
-    private ArrayCollection $checklists;
+    private $checklists;
 
     /**
      * @ORM\OneToMany(targetEntity=Step::class, mappedBy="roadbook")
+     * @Groups({"read:roadbook"})
      */
-    private ArrayCollection $steps;
+    private $steps;
 
     public function __construct()
     {

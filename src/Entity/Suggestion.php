@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\SuggestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SuggestionRepository::class)
+ * @ApiResource()
  * @ORM\HasLifecycleCallbacks()
  */
 class Suggestion
@@ -22,31 +25,37 @@ class Suggestion
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:roadbook"})
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=180)
+     * @Groups({"read:roadbook"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=80)
+     * @Groups({"read:roadbook"})
      */
     private $zipCode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:roadbook"})
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=45, nullable=true)
+     * @Groups({"read:roadbook"})
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:roadbook"})
      */
     private $description;
 
@@ -77,6 +86,7 @@ class Suggestion
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="suggestions")
+     * @Groups({"read:roadbook"})
      */
     private $categories;
 

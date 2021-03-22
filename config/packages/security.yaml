@@ -57,4 +57,10 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/users, roles: IS_AUTHENTICATED_FULLY, methods: [GET, PUT, DELETE, PATCH] }
+        - { path: ^/api/articles, roles: IS_AUTHENTICATED_FULLY, methods: [PUT, POST, DELETE, PATCH] }
         - { path: ^/api/roadbooks, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/checklists, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/information, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/steps, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/suggestions, roles: IS_AUTHENTICATED_FULLY }
+

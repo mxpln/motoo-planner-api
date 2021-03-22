@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ChecklistRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ChecklistRepository::class)
+ * @ApiResource()
  */
 class Checklist
 {
@@ -19,6 +22,7 @@ class Checklist
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:roadbook"})
      */
     private $task;
 

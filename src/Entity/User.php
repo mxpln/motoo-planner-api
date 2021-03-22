@@ -4,15 +4,19 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\HasLifecycleCallbacks()
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read:user-roadbooks"}}
+ * )
  */
 class User implements UserInterface
 {
@@ -20,11 +24,13 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:user-roadbooks"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"read:user-roadbooks"})
      */
     private $email;
 
@@ -41,16 +47,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:roadbook", "read:user-roadbooks"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:roadbook", "read:user-roadbooks"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:user-roadbooks"})
      */
     private $avatar;
 
@@ -66,6 +75,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Roadbook::class, mappedBy="user")
+     * @Groups({"read:user-roadbooks"})
      */
     private $roadbooks;
 
@@ -249,6 +259,6 @@ class User implements UserInterface
      * @ORM\PrePersist()
      */
     public function prePersist() {
-        $this->setCreatedAt(new \DateTime());
+        $this->setCreatedAt(new DateTime());
     }
 }

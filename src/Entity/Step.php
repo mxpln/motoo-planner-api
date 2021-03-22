@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\StepRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
+ * @ApiResource()
  */
 class Step
 {
@@ -19,26 +22,31 @@ class Step
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read:roadbook"})
      */
     private $stepDate;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"read:roadbook"})
      */
     private $stepLat;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"read:roadbook"})
      */
     private $stepLong;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:roadbook"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:roadbook"})
      */
     private $description;
 
@@ -49,6 +57,7 @@ class Step
 
     /**
      * @ORM\OneToOne(targetEntity=Suggestion::class, cascade={"persist", "remove"})
+     * @Groups({"read:roadbook"})
      */
     private $suggestion;
 

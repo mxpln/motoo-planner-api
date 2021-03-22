@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\InformationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=InformationRepository::class)
+ * @ApiResource()
  */
 class Information
 {
@@ -15,32 +18,36 @@ class Information
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read:roadbook"})
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:roadbook"})
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", length=180, nullable=true)
+     * @Groups({"read:roadbook"})
      */
-    private $email;
+    private ?string $email;
 
     /**
      * @ORM\Column(type="string", length=45)
+     * @Groups({"read:roadbook"})
      */
-    private $phone;
+    private ?string $phone;
 
     /**
      * @ORM\ManyToOne(targetEntity=Roadbook::class, inversedBy="informations")
      */
-    private $roadbook;
+    private ?Roadbook $roadbook;
 
     public function getId(): ?int
     {
