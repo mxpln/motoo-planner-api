@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -25,21 +26,25 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Un titre d'article est obligatoire")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Une image à la une est obligatoire")
      */
     private $picture;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Un court extrait est obligatoire")
      */
     private $excerpt;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Un contenu est obligatoire")
      */
     private $content;
 

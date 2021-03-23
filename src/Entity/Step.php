@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\StepRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
@@ -23,18 +24,21 @@ class Step
     /**
      * @ORM\Column(type="datetime")
      * @Groups({"read:roadbook"})
+     * @Assert\NotBlank(message="Une date est obligatoire")
      */
     private $stepDate;
 
     /**
      * @ORM\Column(type="float")
      * @Groups({"read:roadbook"})
+     * @Assert\NotBlank(message="Une latitude est obligatoire")
      */
     private $stepLat;
 
     /**
      * @ORM\Column(type="float")
      * @Groups({"read:roadbook"})
+     * @Assert\NotBlank(message="Une longitude est obligatoire")
      */
     private $stepLong;
 

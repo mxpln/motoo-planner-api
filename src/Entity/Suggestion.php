@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SuggestionRepository::class)
@@ -26,24 +27,28 @@ class Suggestion
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read:roadbook"})
+     * @Assert\NotBlank(message="Une adresse est obligatoire")
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=180)
      * @Groups({"read:roadbook"})
+     * @Assert\NotBlank(message="Une ville est obligatoire")
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=80)
      * @Groups({"read:roadbook"})
+     * @Assert\NotBlank(message="Un code postal est obligatoire")
      */
     private $zipCode;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read:roadbook"})
+     * @Assert\NotBlank(message="Un pays est obligatoire")
      */
     private $country;
 
@@ -71,11 +76,13 @@ class Suggestion
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Une latitude est obligatoire")
      */
     private $suggestLat;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Une longitude est obligatoire")
      */
     private $suggestLong;
 

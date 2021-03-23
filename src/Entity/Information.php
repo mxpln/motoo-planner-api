@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\InformationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=InformationRepository::class)
@@ -29,6 +30,7 @@ class Information
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read:roadbook"})
+     * @Assert\NotBlank(message="Un nom est obligatoire")
      */
     private ?string $name;
 
@@ -41,6 +43,7 @@ class Information
     /**
      * @ORM\Column(type="string", length=45)
      * @Groups({"read:roadbook"})
+     * @Assert\NotBlank(message="Un téléphone est obligatoire")
      */
     private ?string $phone;
 

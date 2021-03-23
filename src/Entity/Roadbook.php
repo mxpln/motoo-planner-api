@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RoadbookRepository::class)
@@ -31,12 +32,18 @@ class Roadbook
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"create:roadbook", "read:roadbook","read:user-roadbooks"})
+     * @Assert\NotBlank(message="Le titre du roadbook est obligatoire")
+     * @Assert\Length(min=3, minMessage="Le titre doit faire entre 3 et 255 caractères", max=255,
+     *     maxMessage="Le titre du roadbook doit faire entre 3 et 255 caractères")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * @Groups({"create:roadbook", "read:roadbook","read:user-roadbooks"})
+     * @Assert\NotBlank(message="La description du roadbook est obligatoire")
+     * @Assert\Length(min=3, minMessage="La description doit faire entre 3 et 255 caractères", max=255,
+     *     maxMessage="La description du roadbook doit faire entre 3 et 255 caractères")
      */
     private $description;
 
@@ -67,6 +74,7 @@ class Roadbook
     /**
      * @ORM\Column(type="datetime")
      * @Groups({"create:roadbook", "read:roadbook"})
+     * @Assert\NotBlank(message="La date de départ de la balade est obligatoire")
      */
     private $tripStart;
 
@@ -84,7 +92,7 @@ class Roadbook
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="roadbooks")
-     * @Groups({"create:roadbook", "read:roadbook"})
+     * @Groups({"read:roadbook"})
      */
     private $user;
 
