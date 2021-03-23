@@ -97,6 +97,13 @@ class Suggestion
      */
     private $categories;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"read:roadbook"})
+     * @Assert\NotBlank(message="Un nom est obligatoire")
+     */
+    private $name;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -268,5 +275,17 @@ class Suggestion
      */
     public function prePersist() {
         $this->setCreatedAt(new \DateTime());
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

@@ -28,8 +28,7 @@ class RoadbookFixtures extends Fixture implements DependentFixtureInterface
                 ->setPictureUrl('https://picsum.photos/300/200')
                 ->setCreatedAt($date)
                 ->setTripStart($faker->dateTimeBetween('now', '+4 months'))
-                ->setShareLink($faker->uuid)
-                ->setSharePassword($faker->password);
+                ->setShareLink($faker->uuid);
 
             $book->setUser($this->getReference('user-' . mt_rand(1, 10)));
 

@@ -42,8 +42,7 @@ class RoadbookPersister implements ContextAwareDataPersisterInterface
                 ->setCreatedAt(new DateTime('now'))
                 ->setUpdatedAt(new DateTime('now'))
                 ->setStatus(1)
-                ->setShareLink($this->slugger->slug(strtolower($data->getTitle())). '-' .uniqid())
-                ->setSharePassword($this->slugger->slug(uniqid()));
+                ->setShareLink($this->slugger->slug(strtolower($data->getTitle())). '-' .uniqid());
         }
 
         // Set the updatedAt value if it's not a POST request

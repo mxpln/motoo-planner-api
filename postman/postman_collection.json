@@ -562,12 +562,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/roadbooks/{{lastInformation}}",
+							"raw": "{{url}}api/informations/{{lastInformation}}",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
-								"roadbooks",
+								"informations",
 								"{{lastInformation}}"
 							]
 						}

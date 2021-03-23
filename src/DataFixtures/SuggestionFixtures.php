@@ -20,6 +20,7 @@ class SuggestionFixtures extends Fixture implements DependentFixtureInterface
             $suggest = new Suggestion();
 
             $suggest
+                ->setName($faker->sentence(5, true))
                 ->setAddress($faker->address)
                 ->setZipcode($faker->postcode)
                 ->setCity($faker->city)

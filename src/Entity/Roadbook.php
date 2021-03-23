@@ -85,12 +85,6 @@ class Roadbook
     private $shareLink;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"create:roadbook", "read:roadbook"})
-     */
-    private $sharePassword;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="roadbooks")
      * @Groups({"read:roadbook", "create:roadbook"})
      */
@@ -218,18 +212,6 @@ class Roadbook
     public function setShareLink(string $shareLink): self
     {
         $this->shareLink = $shareLink;
-
-        return $this;
-    }
-
-    public function getSharePassword(): ?string
-    {
-        return $this->sharePassword;
-    }
-
-    public function setSharePassword(string $sharePassword): self
-    {
-        $this->sharePassword = $sharePassword;
 
         return $this;
     }
