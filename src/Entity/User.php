@@ -271,4 +271,12 @@ class User implements UserInterface
     public function prePersist() {
         $this->setCreatedAt(new DateTime());
     }
+
+    public function __toString()
+    {
+        $firstname = $this->getFirstName();
+        $lastname = $this->getLastName();
+
+        return $firstname . ' ' . $lastname;
+    }
 }
