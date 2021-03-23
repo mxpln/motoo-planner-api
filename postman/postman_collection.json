@@ -169,6 +169,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "should view a user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/users/32",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"users",
+								"32"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -221,6 +262,47 @@
 							],
 							"path": [
 								"roadbooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "should view a roadbook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/roadbooks/22",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"roadbooks",
+								"22"
 							]
 						}
 					},
