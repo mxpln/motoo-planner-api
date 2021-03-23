@@ -19,22 +19,18 @@ class RoadbookRepository extends ServiceEntityRepository
         parent::__construct($registry, Roadbook::class);
     }
 
-    // /**
-    //  * @return Roadbook[] Returns an array of Roadbook objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return int|mix|string
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function countAllRoadbook()
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $queryBuilder = $this->createQueryBuilder('a');
+        $queryBuilder->select('COUNT(a.id) as value');
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Roadbook

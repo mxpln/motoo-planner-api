@@ -19,6 +19,17 @@ class SuggestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Suggestion::class);
     }
 
+    /**
+     * @return int|mix|string
+     */
+    public function countAllSuggestion()
+    {
+        $queryBuilder = $this->createQueryBuilder('a');
+        $queryBuilder->select('COUNT(a.id) as value');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Suggestion[] Returns an array of Suggestion objects
     //  */
