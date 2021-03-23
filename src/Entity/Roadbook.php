@@ -92,7 +92,7 @@ class Roadbook
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="roadbooks")
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "create:roadbook"})
      */
     private $user;
 
