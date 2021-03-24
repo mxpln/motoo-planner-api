@@ -21,7 +21,7 @@ class ArticleCrudController extends AbstractCrudController
         return [
             IntegerField::new('id', 'ID')->onlyOnIndex(),
             TextField::new('title'),
-            TextareaField::new('pictureFile')
+            TextField::new('pictureFile')
                 ->setFormType(VichImageType::class)
                 ->setLabel('Image'),
             TextareaField::new('excerpt'),

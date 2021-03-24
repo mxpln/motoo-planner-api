@@ -13,6 +13,7 @@ use App\Entity\User;
 use App\Repository\RoadbookRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -51,6 +52,13 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Motoo Planner Administration');
+    }
+
+    // ajouter une feuille de style personnalisé
+    public function configureAssets(): Assets
+    {
+        return Assets::new()
+            ->addCssFile('bundles/EasyAdmin/css/style.css');
     }
 
     public function configureMenuItems(): iterable

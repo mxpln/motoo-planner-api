@@ -21,7 +21,16 @@
                 <ul class="list-group">
                     {% for article in articles %}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            {{ article.title }}
+                            <span>{{ article.title }}</span>
+                            <span>
+                                {% if article.picture %}
+                                <img src="{{ vich_uploader_asset(article,'pictureFile') }}"
+                                       alt="{{ article.id }}"
+                                       style="height: 100px">
+                                {% else %}
+                                    <p>Pas d'image</p>
+                                {% endif %}
+                            </span>
                         </li>
                     {% endfor %}
                 </ul>
