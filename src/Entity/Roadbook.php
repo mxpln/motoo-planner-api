@@ -73,7 +73,7 @@ class Roadbook
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"create:roadbook", "read:roadbook"})
+     * @Groups({"create:roadbook", "read:roadbook", "read:user-roadbooks"})
      * @Assert\NotBlank(message="La date de départ de la balade est obligatoire")
      */
     private $tripStart;

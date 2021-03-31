@@ -76,6 +76,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read:user-roadbooks"})
      */
     private $createdAt;
 
