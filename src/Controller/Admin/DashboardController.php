@@ -38,6 +38,7 @@ class DashboardController extends AbstractDashboardController
     }
     /**
      * @Route("/admin", name="admin")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function index(): Response
     {
