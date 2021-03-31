@@ -91,19 +91,19 @@ class Roadbook
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Information::class, mappedBy="roadbook")
+     * @ORM\OneToMany(targetEntity=Information::class, mappedBy="roadbook", cascade={"persist", "remove"})
      * @Groups({"read:roadbook"})
      */
     private $informations;
 
     /**
-     * @ORM\OneToMany(targetEntity=Checklist::class, mappedBy="roadbook")
+     * @ORM\OneToMany(targetEntity=Checklist::class, mappedBy="roadbook", cascade={"persist", "remove"})
      * @Groups({"read:roadbook"})
      */
     private $checklists;
 
     /**
-     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="roadbook")
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="roadbook", cascade={"persist", "remove"})
      * @Groups({"read:roadbook"})
      */
     private $steps;

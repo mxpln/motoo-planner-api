@@ -84,7 +84,7 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Roadbook::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Roadbook::class, mappedBy="user", cascade={"persist", "remove"})
      * @Groups({"read:user-roadbooks"})
      */
     private $roadbooks;
