@@ -10,6 +10,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=RoadbookRepository::class)
@@ -18,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     normalizationContext={"groups"={"read:roadbook"}},
  *     denormalizationContext={"groups"={"create:roadbook"}}
  * )
+ * @Vich\Uploadable
  */
 class Roadbook
 {
@@ -58,6 +61,13 @@ class Roadbook
      * @Groups({"create:roadbook", "read:roadbook","read:user-roadbooks"})
      */
     private $pictureUrl;
+
+    /**
+     * @Vich\UploadableField(mapping="article_pictures", fileNameProperty="pictureUrl")
+     * @var File
+     */
+    private $pictureFile;
+
 
     /**
      * @ORM\Column(type="datetime")
@@ -107,14 +117,6 @@ class Roadbook
      * @Groups({"read:roadbook"})
      */
     private $steps;
-
-    /**
-     * @var MediaObject|null
-     *
-     * @ORM\ManyToOne(targetEntity=MediaObject::class)
-     * @ORM\JoinColumn(nullable=true)
-     */
-    public $image;
 
     public function __construct()
     {
@@ -174,6 +176,30 @@ class Roadbook
         $this->pictureUrl = $pictureUrl;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureFile()
+    {
+        return $this->pictureFile;
+    }
+
+    /**
+     * @param File|null $pictureFile
+     */
+    public function setPictureFile(?File $pictureFile = null)
+    {
+        $this->pictureFile = $pictureFile;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if (null !== $pictureFile) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new DateTime('now');
+        }
     }
 
     public function getCreatedAt(): ?DateTimeInterface
