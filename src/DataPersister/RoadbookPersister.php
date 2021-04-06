@@ -33,7 +33,7 @@ class RoadbookPersister implements ContextAwareDataPersisterInterface
         return $data instanceof Roadbook;
     }
 
-    public function persist($data, array $context = [])
+    public function persist($data, array $context = []): object
     {
         // 1. Mettre une date de création sur le roadbook
         //    ajouter les autres champs : share_link, share_password, status

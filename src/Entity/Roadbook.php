@@ -58,15 +58,16 @@ class Roadbook
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"create:roadbook", "read:roadbook","read:user-roadbooks"})
+     * @Groups({"read:roadbook","read:user-roadbooks"})
      */
     private $pictureUrl;
 
     /**
-     * @Vich\UploadableField(mapping="article_pictures", fileNameProperty="pictureUrl")
+     * @Vich\UploadableField(mapping="roadbook_pictures", fileNameProperty="pictureUrl")
+     * @Groups({"create:roadbook"})
      * @var File
      */
-    private $pictureFile;
+    private $pictureUrlFile;
 
 
     /**
@@ -181,22 +182,22 @@ class Roadbook
     /**
      * @return mixed
      */
-    public function getPictureFile()
+    public function getPictureUrlFile()
     {
-        return $this->pictureFile;
+        return $this->pictureUrlFile;
     }
 
     /**
-     * @param File|null $pictureFile
+     * @param File|null $pictureUrlFile
      */
-    public function setPictureFile(?File $pictureFile = null)
+    public function setPictureUrlFile(?File $pictureUrlFile = null)
     {
-        $this->pictureFile = $pictureFile;
+        $this->pictureUrlFile = $pictureUrlFile;
 
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
-        if (null !== $pictureFile) {
+        if (null !== $pictureUrlFile) {
             // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new DateTime('now');
         }
