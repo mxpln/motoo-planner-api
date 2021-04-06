@@ -108,6 +108,14 @@ class Roadbook
      */
     private $steps;
 
+    /**
+     * @var MediaObject|null
+     *
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     */
+    public $image;
+
     public function __construct()
     {
         $this->informations = new ArrayCollection();
