@@ -63,7 +63,7 @@ class MediaObject
      * @var string|null
      *
      * @ApiProperty(iri="http://schema.org/contentUrl")
-     * @Groups({"media_object_read"})
+     * @Groups({"media_object_read", "read:user-roadbooks"})
      */
     public $contentUrl;
 
@@ -79,11 +79,24 @@ class MediaObject
      * @var string|null
      *
      * @ORM\Column(nullable=true)
+     * @Groups({"read:roadbook"})
      */
     public $filePath;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFilePath(): ?string
+    {
+        return $this->filePath;
+    }
+
+    public function setFilePath(?string $filePath): self
+    {
+        $this->filePath = $filePath;
+
+        return $this;
     }
 }

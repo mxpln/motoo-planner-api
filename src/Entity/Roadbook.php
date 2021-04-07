@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RoadbookRepository;
 use DateTimeInterface;
@@ -16,6 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass=RoadbookRepository::class)
  * @ApiResource(
+ *     iri="http://schema.org/Book",
  *     attributes={"order"={"updatedAt":"DESC"}},
  *     normalizationContext={"groups"={"read:roadbook"}},
  *     denormalizationContext={"groups"={"create:roadbook"}}
@@ -57,21 +59,13 @@ class Roadbook
     private $status;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"read:roadbook","read:user-roadbooks"})
-     */
-    private $pictureUrl;
-
-    /**
      * @var MediaObject|null
      *
-     * @Vich\UploadableField(mapping="roadbook_pictures", fileNameProperty="pictureUrl")
-     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\ManyToOne(targetEntity=MediaObject::class, inversedBy="roadbooks")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"create:roadbook"})
+     * @ApiProperty(iri="http://schema.org/image")
      */
-    private $pictureUrlFile;
-
+    private $pictureUrl;
 
     /**
      * @ORM\Column(type="datetime")
@@ -180,30 +174,6 @@ class Roadbook
         $this->pictureUrl = $pictureUrl;
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPictureUrlFile()
-    {
-        return $this->pictureUrlFile;
-    }
-
-    /**
-     * @param File|null $pictureUrlFile
-     */
-    public function setPictureUrlFile(?File $pictureUrlFile = null)
-    {
-        $this->pictureUrlFile = $pictureUrlFile;
-
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if (null !== $pictureUrlFile) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new DateTime('now');
-        }
     }
 
     public function getCreatedAt(): ?DateTimeInterface
