@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Controller\CreateMediaObjectAction;
 
 /**
  * @ORM\Entity(repositoryClass=RoadbookRepository::class)
@@ -63,7 +64,6 @@ class Roadbook
      * @ORM\ManyToOne(targetEntity=MediaObject::class, inversedBy="roadbooks")
      * @ORM\JoinColumn(nullable=true)
      * @ApiProperty(iri="http://schema.org/image")
-     * @Groups({"create:roadbook", "post"})
      */
     private $pictureUrl;
 
