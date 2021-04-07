@@ -18,12 +18,12 @@ api_platform:
         csv:
             mime_types: ['text/csv']
         multipart:
-            mime_types: [ 'multipart/form-data' ]
+            mime_types: ['multipart/form-data']
 
 
     # The list of enabled patch formats. The first one will be the default.
     patch_formats:
         json: ['application/merge-patch+json']
-        multipart: ['multipart/form-data']
+
     swagger:
         versions: [3]

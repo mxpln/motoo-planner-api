@@ -15,13 +15,13 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity
  * @ApiResource(
  *     iri="http://schema.org/MediaObject",
- *     normalizationContext={"groups"={"media_object_read"}},
+ *     normalizationContext={"groups"={"create:roadbook", "read:roadbook"}},
  *     collectionOperations={
  *         "post"={
  *             "controller"=CreateMediaObjectAction::class,
  *             "deserialize"=false,
  *             "security"="is_granted('ROLE_USER')",
- *             "validation_groups"={"Default", "media_object_create"},
+ *             "validation_groups"={"Default", "create:roadbook"},
  *             "openapi_context"={
  *                 "requestBody"={
  *                     "content"={
@@ -63,14 +63,14 @@ class MediaObject
      * @var string|null
      *
      * @ApiProperty(iri="http://schema.org/contentUrl")
-     * @Groups({"media_object_read", "read:user-roadbooks"})
+     * @Groups({"read:roadbook", "create:roadbook"})
      */
     public $contentUrl;
 
     /**
      * @var File|null
      *
-     * @Assert\NotNull(groups={"media_object_create"})
+     * @Assert\NotNull(groups={"create:roadbook"})
      * @Vich\UploadableField(mapping="media_object", fileNameProperty="filePath")
      */
     public $file;
@@ -79,7 +79,7 @@ class MediaObject
      * @var string|null
      *
      * @ORM\Column(nullable=true)
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "create:roadbook"})
      */
     public $filePath;
 
