@@ -24,5 +24,6 @@ api_platform:
     # The list of enabled patch formats. The first one will be the default.
     patch_formats:
         json: ['application/merge-patch+json']
+        multipart: ['multipart/form-data']
     swagger:
         versions: [3]

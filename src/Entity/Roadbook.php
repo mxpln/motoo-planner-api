@@ -63,9 +63,12 @@ class Roadbook
     private $pictureUrl;
 
     /**
+     * @var MediaObject|null
+     *
      * @Vich\UploadableField(mapping="roadbook_pictures", fileNameProperty="pictureUrl")
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"create:roadbook"})
-     * @var File
      */
     private $pictureUrlFile;
 
