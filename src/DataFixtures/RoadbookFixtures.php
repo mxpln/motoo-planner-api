@@ -28,7 +28,7 @@ class RoadbookFixtures extends Fixture implements DependentFixtureInterface
                 ->setCreatedAt($date)
                 ->setTripStart($faker->dateTimeBetween('now', '+4 months'))
                 ->setShareLink($faker->uuid)
-                ->setUser($this->getReference('user-' . mt_rand(1, 15)));
+                ->setUser($this->getReference('user-' . mt_rand(1, 10)));
 
             $manager->persist($book);
 

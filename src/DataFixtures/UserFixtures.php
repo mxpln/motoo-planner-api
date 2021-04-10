@@ -51,17 +51,17 @@ class UserFixtures extends Fixture
 
         // ===== CREATION DE 10 USERS ALEATOIRES ======
 
-        for ($i = 1; $i <= 15; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
 
             // génération des noms et prénoms avec faker
             $firstname = $faker->firstName();
             $lastname = $faker->lastName();
-            $username = substr($firstname, 0, 1) . $lastname;
+            $username = "password";
 
             $user = new User();
 
             $user
-                ->setEmail($firstname . "." . $lastname . "@gmail.com")
+                ->setEmail($faker->freeEmail())
                 ->setFirstName($firstname)
                 ->setLastName($lastname)
                 ->setRoles(["ROLE_USER"])

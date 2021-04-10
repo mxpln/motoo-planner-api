@@ -72,6 +72,11 @@ class Step
      */
     private $type;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getStepDate(): ?\DateTimeInterface
     {
         return $this->stepDate;
