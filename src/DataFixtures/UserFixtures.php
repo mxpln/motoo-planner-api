@@ -29,7 +29,8 @@ class UserFixtures extends Fixture
         $admin->setEmail("tony.dugue@gmail.com")
             ->setFirstName("Tony")
             ->setLastName("Dugué")
-            ->setRoles(["ROLE_ADMIN"]);
+            ->setRoles(["ROLE_ADMIN"])
+            ->setAvatar("https://eu.ui-avatars.com/api/?name=Tony+Dugué");
 
         $password = $this->encoder->encodePassword($admin, "tdugue");
         $admin->setPassword($password);
@@ -40,7 +41,8 @@ class UserFixtures extends Fixture
         $john->setEmail("john.doe@gmail.com")
             ->setFirstName("John")
             ->setLastName("Doe")
-            ->setRoles(["ROLE_ADMIN"]);
+            ->setRoles(["ROLE_ADMIN"])
+            ->setAvatar("https://eu.ui-avatars.com/api/?name=John+Doe");
 
         $password = $this->encoder->encodePassword($john, "jdoe");
         $john->setPassword($password);
@@ -49,7 +51,7 @@ class UserFixtures extends Fixture
 
         // ===== CREATION DE 10 USERS ALEATOIRES ======
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 15; $i++) {
 
             // génération des noms et prénoms avec faker
             $firstname = $faker->firstName();

@@ -60,15 +60,17 @@ class Step
     private $roadbook;
 
     /**
-     * @ORM\OneToOne(targetEntity=Suggestion::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Suggestion::class)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"read:roadbook"})
      */
     private $suggestion;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity=Type::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;
 
     public function getStepDate(): ?\DateTimeInterface
     {
@@ -150,6 +152,18 @@ class Step
     public function setSuggestion(?Suggestion $suggestion): self
     {
         $this->suggestion = $suggestion;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

@@ -18,6 +18,7 @@ class Information
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:roadbook"})
      */
     private ?int $id;
 

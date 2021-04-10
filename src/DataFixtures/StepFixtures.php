@@ -15,7 +15,7 @@ class StepFixtures extends Fixture implements DependentFixtureInterface
         // Initialisation du générateur Faker
         $faker = Factory::create('fr_FR');
 
-        for($i = 1; $i <= 30; $i++) {
+        for($i = 1; $i <= 60; $i++) {
 
             $step = new Step();
 
@@ -24,11 +24,9 @@ class StepFixtures extends Fixture implements DependentFixtureInterface
                 ->setStepLat($faker->randomFloat(15, 47, 48))
                 ->setStepLong($faker->randomFloat(15, -2, -1))
                 ->setTitle($faker->sentence(7, true))
-                ->setDescription($faker->sentence(10, true));
-
-            $step
-                ->setRoadbook($this->getReference('book-' . mt_rand(1, 15)));
-                //->setSuggestion($this->getReference('suggest-' . mt_rand(1, 15)));
+                ->setDescription($faker->sentence(10, true))
+                ->setRoadbook($this->getReference('book-' . mt_rand(1, 15)))
+                ->setType($this->getReference('type-' . mt_rand(1, 5)));
 
             $manager->persist($step);
         }
@@ -40,7 +38,8 @@ class StepFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             SuggestionFixtures::class,
-            RoadbookFixtures::class
+            RoadbookFixtures::class,
+            TypeFixtures::class
         ];
     }
 }

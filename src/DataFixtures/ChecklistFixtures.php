@@ -15,12 +15,13 @@ class ChecklistFixtures extends Fixture implements DependentFixtureInterface
         // Initialisation du générateur Faker
         $faker = Factory::create('fr_FR');
 
-        for($i = 1; $i <= 30; $i++) {
+        for($i = 1; $i <= 60; $i++) {
 
             $task = new Checklist();
             $task->setTask($faker->sentence(8, true));
+            $task->setChecked(false);
 
-            $task->setRoadbook($this->getReference('book-' . mt_rand(1, 15)));
+            $task->setRoadbook($this->getReference('book-' . mt_rand(1, 30)));
 
             $manager->persist($task);
         }

@@ -18,6 +18,7 @@ class Checklist
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:roadbook"})
      */
     private $id;
 
@@ -26,6 +27,12 @@ class Checklist
      * @Groups({"read:roadbook"})
      */
     private $task;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"read:roadbook"})
+     */
+    private $checked;
 
     /**
      * @ORM\ManyToOne(targetEntity=Roadbook::class, inversedBy="checklists")
@@ -57,6 +64,18 @@ class Checklist
     public function setRoadbook(?Roadbook $roadbook): self
     {
         $this->roadbook = $roadbook;
+
+        return $this;
+    }
+
+    public function getChecked(): ?bool
+    {
+        return $this->checked;
+    }
+
+    public function setChecked(bool $checked): self
+    {
+        $this->checked = $checked;
 
         return $this;
     }

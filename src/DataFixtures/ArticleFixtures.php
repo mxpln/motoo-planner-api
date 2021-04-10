@@ -14,14 +14,14 @@ class ArticleFixtures extends Fixture
         // Initialisation du générateur Faker
         $faker = Factory::create('fr_FR');
 
-        for($i = 1; $i <= 6; $i++) {
+        for($i = 1; $i <= 10; $i++) {
             $article = new Article();
 
             $article
                 ->setTitle($faker->sentence(5, true))
                 ->setPicture('https://picsum.photos/800/500')
                 ->setExcerpt($faker->text(150))
-                ->setContent($faker->paragraph(8, true));
+                ->setContent($faker->paragraph(30, true));
 
             $manager->persist($article);
         }

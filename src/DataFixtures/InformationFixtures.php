@@ -15,7 +15,7 @@ class InformationFixtures extends Fixture implements DependentFixtureInterface
         // Initialisation du générateur Faker
         $faker = Factory::create('fr_FR');
 
-        for($i = 1; $i <= 15; $i++) {
+        for($i = 1; $i <= 60; $i++) {
 
             // génération des noms et prénoms avec faker
             $firstname = $faker->firstName();
@@ -27,9 +27,8 @@ class InformationFixtures extends Fixture implements DependentFixtureInterface
                 ->setName($username)
                 ->setEmail($firstname . "." . $lastname . "@gmail.com")
                 ->setPhone($faker->phoneNumber)
-                ->setDescription($faker->sentence(10, true));
-
-            $info->setRoadbook($this->getReference('book-' . mt_rand(1, 15)));
+                ->setDescription($faker->sentence(10, true))
+                ->setRoadbook($this->getReference('book-' . mt_rand(1, 30)));
 
             $manager->persist($info);
         }

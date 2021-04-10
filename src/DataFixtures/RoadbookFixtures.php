@@ -15,7 +15,7 @@ class RoadbookFixtures extends Fixture implements DependentFixtureInterface
         // Initialisation du générateur Faker
         $faker = Factory::create('fr_FR');
 
-        for($i = 1; $i <= 15; $i++) {
+        for($i = 1; $i <= 30; $i++) {
 
             $date = $faker->dateTimeBetween('-4 months');
 
@@ -25,12 +25,10 @@ class RoadbookFixtures extends Fixture implements DependentFixtureInterface
                 ->setTitle($faker->sentence(4, true))
                 ->setDescription($faker->sentence(8, true))
                 ->setStatus($faker->numberBetween(1,2))
-                ->setPictureUrl('https://picsum.photos/300/200')
                 ->setCreatedAt($date)
                 ->setTripStart($faker->dateTimeBetween('now', '+4 months'))
-                ->setShareLink($faker->uuid);
-
-            $book->setUser($this->getReference('user-' . mt_rand(1, 10)));
+                ->setShareLink($faker->uuid)
+                ->setUser($this->getReference('user-' . mt_rand(1, 15)));
 
             $manager->persist($book);
 
