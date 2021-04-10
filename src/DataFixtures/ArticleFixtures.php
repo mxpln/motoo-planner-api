@@ -19,7 +19,7 @@ class ArticleFixtures extends Fixture
 
             $article
                 ->setTitle($faker->sentence(5, true))
-                ->setPicture('https://picsum.photos/800/500')
+                ->setPicture('')
                 ->setExcerpt($faker->text(150))
                 ->setContent($faker->paragraph(30, true));
 

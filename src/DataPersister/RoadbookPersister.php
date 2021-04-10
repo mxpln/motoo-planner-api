@@ -53,6 +53,8 @@ class RoadbookPersister implements ContextAwareDataPersisterInterface
         // 2. Demander à Doctrine de persister le roadbook
         $this->em->persist($data);
         $this->em->flush();
+
+        return $data;
     }
 
     public function remove($data, array $context = [])
