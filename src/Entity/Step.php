@@ -69,6 +69,7 @@ class Step
     /**
      * @ORM\ManyToOne(targetEntity=Type::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"read:roadbook"})
      */
     private $type;
 

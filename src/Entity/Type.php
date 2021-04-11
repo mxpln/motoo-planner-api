@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TypeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -21,16 +22,19 @@ class Type
 
     /**
      * @ORM\Column(type="string", length=180)
+     * @Groups({"read:roadbook"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=180)
+     * @Groups({"read:roadbook"})
      */
     private $icon;
 
     /**
      * @ORM\Column(type="string", length=45)
+     * @Groups({"read:roadbook"})
      */
     private $slug;
 
