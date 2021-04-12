@@ -18,6 +18,7 @@ class Step
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:roadbook"})
      */
     private $id;
 
