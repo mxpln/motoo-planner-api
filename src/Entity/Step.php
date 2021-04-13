@@ -26,34 +26,34 @@ class Step
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "read:steps"})
      * @Assert\NotBlank(message="Une date est obligatoire")
      */
     private $stepDate;
 
     /**
      * @ORM\Column(type="float")
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "read:steps"})
      * @Assert\NotBlank(message="Une latitude est obligatoire")
      */
     private $stepLat;
 
     /**
      * @ORM\Column(type="float")
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "read:steps"})
      * @Assert\NotBlank(message="Une longitude est obligatoire")
      */
     private $stepLong;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "read:steps"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "read:steps"})
      */
     private $description;
 
