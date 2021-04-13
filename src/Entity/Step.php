@@ -10,7 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read:steps"}},
+ * )
  */
 class Step
 {
@@ -18,7 +20,7 @@ class Step
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "read:steps"})
      */
     private $id;
 
@@ -70,7 +72,7 @@ class Step
     /**
      * @ORM\ManyToOne(targetEntity=Type::class)
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "read:steps"})
      */
     private $type;
 

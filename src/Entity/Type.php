@@ -22,19 +22,19 @@ class Type
 
     /**
      * @ORM\Column(type="string", length=180)
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "read:steps"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=180)
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "read:steps"})
      */
     private $icon;
 
     /**
      * @ORM\Column(type="string", length=45)
-     * @Groups({"read:roadbook"})
+     * @Groups({"read:roadbook", "read:steps"})
      */
     private $slug;
 
