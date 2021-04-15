@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RoadbookRepository;
 use DateTimeInterface;
@@ -11,17 +10,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=RoadbookRepository::class)
  * @ApiResource(
- *     iri="http://schema.org/Book",
  *     attributes={"order"={"updatedAt":"DESC"}},
  *     normalizationContext={"groups"={"read:roadbook"}},
  *     denormalizationContext={"groups"={"create:roadbook"}}
  * )
- * @Vich\Uploadable
  */
 class Roadbook
 {
@@ -58,11 +54,8 @@ class Roadbook
     private $status;
 
     /**
-     * @var MediaObject|null
-     *
-     * @ORM\ManyToOne(targetEntity=MediaObject::class, inversedBy="roadbooks")
-     * @ORM\JoinColumn(nullable=true)
-     * @ApiProperty(iri="http://schema.org/image")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:roadbook", "read:user-roadbooks", "create:roadbook"})
      */
     private $pictureUrl;
 
