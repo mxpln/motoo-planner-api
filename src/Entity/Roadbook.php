@@ -8,10 +8,8 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=RoadbookRepository::class)
@@ -20,7 +18,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     normalizationContext={"groups"={"read:roadbook"}},
  *     denormalizationContext={"groups"={"create:roadbook"}}
  * )
- * @Vich\Uploadable
  */
 class Roadbook
 {
@@ -58,17 +55,9 @@ class Roadbook
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"read:roadbook", "read:user-roadbooks"})
+     * @Groups({"read:roadbook", "read:user-roadbooks", "post_picture"})
      */
     private $pictureUrl;
-
-    /**
-     * @Vich\UploadableField(mapping="media_object", fileNameProperty="pictureUrl")
-     * @ORM\ManyToOne(targetEntity=MediaObject::class, cascade={"persist", "remove"})
-     * @Groups({"create:roadbook"})
-     * @var File
-     */
-    private $pictureUrlFile;
 
     /**
      * @ORM\Column(type="datetime")
@@ -177,30 +166,6 @@ class Roadbook
         $this->pictureUrl = $pictureUrl;
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPictureUrlFile()
-    {
-        return $this->pictureUrlFile;
-    }
-
-    /**
-     * @param File|null $pictureUrlFile
-     */
-    public function setPictureUrlFile(?File $pictureUrlFile = null)
-    {
-        $this->pictureUrlFile = $pictureUrlFile;
-
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if (null !== $pictureUrlFile) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new DateTime('now');
-        }
     }
 
     public function getCreatedAt(): ?DateTimeInterface
