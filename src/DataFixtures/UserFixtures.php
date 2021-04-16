@@ -30,7 +30,7 @@ class UserFixtures extends Fixture
             ->setFirstName("Tony")
             ->setLastName("Dugué")
             ->setRoles(["ROLE_ADMIN"])
-            ->setAvatar("https://eu.ui-avatars.com/api/?name=Tony+Dugué");
+            ->setAvatar("https://eu.ui-avatars.com/api/?name=Tony+Dugué&background=random");
 
         $password = $this->encoder->encodePassword($admin, "tdugue");
         $admin->setPassword($password);
@@ -42,7 +42,7 @@ class UserFixtures extends Fixture
             ->setFirstName("John")
             ->setLastName("Doe")
             ->setRoles(["ROLE_ADMIN"])
-            ->setAvatar("https://eu.ui-avatars.com/api/?name=John+Doe");
+            ->setAvatar("https://eu.ui-avatars.com/api/?name=John+Doe&background=random");
 
         $password = $this->encoder->encodePassword($john, "jdoe");
         $john->setPassword($password);
@@ -65,7 +65,7 @@ class UserFixtures extends Fixture
                 ->setFirstName($firstname)
                 ->setLastName($lastname)
                 ->setRoles(["ROLE_USER"])
-                ->setAvatar("https://eu.ui-avatars.com/api/?name=" . $firstname . "+" . $lastname);
+                ->setAvatar("https://eu.ui-avatars.com/api/?name=" . $firstname . "+" . $lastname . "&background=random");
 
             $password = $this->encoder->encodePassword($user, $username);
             $user->setPassword($password);
