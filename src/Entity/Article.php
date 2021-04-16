@@ -37,7 +37,6 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Une image à la une est obligatoire")
      */
     private $picture;
 

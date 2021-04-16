@@ -59,7 +59,7 @@ class DashboardController extends AbstractDashboardController
     public function configureAssets(): Assets
     {
         return Assets::new()
-            ->addCssFile('bundles/EasyAdmin/css/style.css');
+            ->addCssFile('bundles/EasyAdmin/app.css');
     }
 
     public function configureMenuItems(): iterable
