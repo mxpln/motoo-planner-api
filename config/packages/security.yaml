@@ -76,4 +76,5 @@ security:
         - { path: ^/api/information, roles: IS_AUTHENTICATED_FULLY, methods: [GET, PUT, POST, DELETE] }
         - { path: ^/api/steps, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/suggestions, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/share, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 

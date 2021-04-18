@@ -31,16 +31,29 @@ class RoadbookRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
-
-    /*
-    public function findOneBySomeField($value): ?Roadbook
+    // récupération des données d'un roadbook en fonction du slug
+    public function findOneRoadbookShare($slug): ?Roadbook
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder('r')   // SELECT * FROM roadbook AS r
+            ->addSelect('informations')
+            ->addSelect('checklists')
+            ->addSelect('steps')
+            ->innerJoin('r.informations', 'informations')
+            ->innerJoin('r.checklists', 'checklists')
+            ->innerJoin('r.steps', 'steps')
+            ->where('r.shareLink = :slug')
+            ->setParameter('slug', $slug)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }
+
+
+
+
+
+
+
+
+
