@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
  * @ApiResource(
+ *     attributes={"order"={"stepDate":"ASC"}},
  *     normalizationContext={"groups"={"read:steps"}},
  * )
  */

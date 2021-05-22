@@ -35,13 +35,13 @@ class RoadbookRepository extends ServiceEntityRepository
     public function findOneRoadbookShare($slug): ?Roadbook
     {
         return $this->createQueryBuilder('r')   // SELECT * FROM roadbook AS r
-            ->addSelect('informations')
-            ->addSelect('checklists')
-            ->addSelect('steps')
+            ->addSelect('informations')        // on fait une liaison avec table informations
+            ->addSelect('checklists')          // on fait une liaison avec table checklists
+            ->addSelect('steps')               // on fait une liaison avec table steps
             ->innerJoin('r.informations', 'informations')
             ->innerJoin('r.checklists', 'checklists')
             ->innerJoin('r.steps', 'steps')
-            ->where('r.shareLink = :slug')
+            ->where('r.shareLink = :slug')   // on récupère le roadbook avec le slug passé en paramètre
             ->setParameter('slug', $slug)
             ->getQuery()
             ->getOneOrNullResult()

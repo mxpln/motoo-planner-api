@@ -16,6 +16,7 @@ class RoadbookShareController
      */
     public function getRoadbookShare(string $shareLink, RoadbookRepository $roadbookRepository, SerializerInterface $serializer): Response
     {
+        // exécution requête personnalisé pour récupérer le contenu d'un roadbook
         $roadbook = $roadbookRepository->findOneRoadbookShare($shareLink);
 
         // on trasnforme en JSON le résultat de la requête qui est de type persistentcollection

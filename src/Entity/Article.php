@@ -14,6 +14,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @ApiResource(
+ *     attributes={"order"={"createdAt": "DESC"}},
  *     collectionOperations={"get"},
  *     itemOperations={"get"}
  * )
