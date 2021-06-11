@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=RoadbookRepository::class)
  * @ApiResource(
- *     attributes={"order"={"updatedAt":"DESC"}},
  *     normalizationContext={"groups"={"read:roadbook"}},
  *     denormalizationContext={"groups"={"create:roadbook"}}
  * )

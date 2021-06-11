@@ -40,6 +40,11 @@ ou
 $ php -S localhost:3000 -t public 
 ```
 
+Pour démarrer la compilation des assets :
+```sh
+$ npm run watch
+```
+
 ## lancer les tests avec newman
 ***
 
